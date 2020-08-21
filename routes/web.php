@@ -11,4 +11,12 @@
 |
 */
 
-Route::get("/{url}", 'SpaController@index')->where('url', '.*');
+Route::get("/", 'WelcomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get( '/{any}',function() {
+    return 'Page not found';
+})->where('any', '.*');
