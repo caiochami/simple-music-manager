@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Carbon\Carbon;
+
 
 class User extends Authenticatable
 {
@@ -29,4 +31,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getPresentedBirthdayAttribute(){
+        return Carbon::parse($this->birthday);
+    }
+
+    public function getPresentedGenderAttribute(){
+        switch ($this->gender) {
+            case 'male':
+                return 'Masculino';
+                break;
+                case 'female':
+                    return 'Feminino';
+                    break;
+            
+            default:
+                'Não definido';
+                break;
+        }
+    }
+
 }

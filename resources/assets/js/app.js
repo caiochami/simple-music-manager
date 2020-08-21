@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 Vue.component('my-application', require('./views/index.vue'));
 
-import store from "./store";
+/* import store from "./store";
 
 import router from './router.js'
 
@@ -33,7 +33,7 @@ router.beforeEach((to, from, next) => {
  
     
  })
- 
+  */
 
 window.app = new Vue({
     el: '#app',
@@ -44,7 +44,7 @@ window.app = new Vue({
     }),
     created(){  
 
-        const userInfo = localStorage.getItem('user')
+        /* const userInfo = localStorage.getItem('user')
 
         if (userInfo) {
             const userData = JSON.parse(userInfo)
@@ -98,7 +98,7 @@ window.app = new Vue({
             };
         
             return config;
-        });
+        }); */
     }
 });
 

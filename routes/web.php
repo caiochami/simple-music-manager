@@ -11,12 +11,20 @@
 |
 */
 
-Route::get("/", 'WelcomeController@index');
+Route::get("/", 'WelcomeController@index')->name('welcome');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::resource('artists', 'ArtistController' ,['except' => [ 'show']]);
+    Route::resource('albums', 'AlbumController');
+    Route::resource('tracks', 'TrackController', ['except' => [ 'show']]);
+    Route::resource('genres', 'GenreController' ,['except' => [ 'show']]);
+    
+});
 
 Route::get( '/{any}',function() {
-    return 'Page not found';
+    return view('errors.404');
 })->where('any', '.*');

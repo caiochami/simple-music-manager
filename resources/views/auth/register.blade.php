@@ -14,74 +14,71 @@
             action="{{ route('register') }}">
                 {{ csrf_field() }}
 
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                <div class="form-group">
                     <label for="name" class="control-label">Nome</label>
 
                    
-                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                        <input id="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
                         @if ($errors->has('name'))
-                            <span class="help-block">
+                            <div class="invalid-feedback">
                                 <strong>{{ $errors->first('name') }}</strong>
-                            </span>
+                            </div>
                         @endif
                     
                 </div>
 
                 <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                     <label for="birthday" class="control-label">Data de nascimento</label>
-
-                   
-                        <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required autofocus>
+                        <input id="birthday" type="date" class="form-control {{ $errors->has('birthday') ? 'is-invalid' : '' }}" name="birthday" value="{{ old('birthday') }}" required autofocus>
 
                         @if ($errors->has('birthday'))
-                            <span class="help-block">
+                            <div class="invalid-feedback">
                                 <strong>{{ $errors->first('birthday') }}</strong>
-                            </span>
+                            </div>
                         @endif
-                    
                 </div>
 
-                <div class="form-group {{ $errors->has('gender') ? ' has-error' : '' }}">
+                <div class="form-group ">
                     <label class="control-label" for="gender">Sexo</label>
                     
-                    <select class="form-control" name="gender" id="gender">
+                    <select class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}" name="gender" id="gender">
                         <option value="male">Masculino</option>
                         <option value="female">Feminino</option>
                         <option value="undefined">Não definido</option>
                     </select>
                     
                     @if ($errors->has('gender'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('gender') }}</strong>
-                        </span>
-                    @endif
+                    <div class="invalid-feedback">
+                        <strong>{{ $errors->first('gender') }}</strong>
+                    </div>
+                @endif
                 </div>                      
 
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <div class="form-group">
                     <label for="email" class="control-label">E-Mail</label>
 
                     
-                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                        <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                         @if ($errors->has('email'))
-                            <span class="help-block">
+                            <div class="invalid-feedback">
                                 <strong>{{ $errors->first('email') }}</strong>
-                            </span>
+                            </div>
                         @endif
                    
                 </div>
 
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <div class="form-group">
                     <label for="password" class="control-label">Senha</label>
 
                    
-                        <input id="password" type="password" class="form-control" name="password" required>
+                        <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" required>
 
                         @if ($errors->has('password'))
-                            <span class="help-block">
+                            <div class="invalid-feedback">
                                 <strong>{{ $errors->first('password') }}</strong>
-                            </span>
+                            </div>
                         @endif
                    
                 </div>

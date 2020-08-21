@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group([
+/* Route::group([
 
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -25,4 +25,4 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
-});
+}); */

@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Validation\Rule;
+
 class ArtistRequest extends FormRequest
 {
     /**
@@ -13,7 +15,7 @@ class ArtistRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -23,8 +25,15 @@ class ArtistRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $rules = [];
+
+        if($this->getMethod() === "POST"){
+            $rules += ['name' => 'required|string|max:255|unique:artists,name'];
+        }
+        else{
+            $rules += ['name' => 'required|string|max:255|unique:artists,name,'.$this->artist->id];
+        }
+        
+        return $rules;
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AlbumRequest extends FormRequest
+use Illuminate\Validation\Rule;
+
+class GenreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,16 +25,13 @@ class AlbumRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'year' => 'integer|required',
-            'artist' =>'integer|required|exists:artists,id'
-        ];
+        $rules = [];
 
         if($this->getMethod() === "POST"){
-            $rules += ['title' => 'required|string|max:255|unique:albums,title'];
+            $rules += ['name' => 'required|string|max:255|unique:genres,name'];
         }
         else{
-            $rules += ['title' => 'required|string|max:255|unique:albums,title,'.$this->album->id];
+            $rules += ['name' => 'required|string|max:255|unique:genres,name,'.$this->artist->id];
         }
         
         return $rules;

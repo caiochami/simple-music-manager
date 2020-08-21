@@ -1,35 +1,44 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">{{config('app.name')}}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        @if(auth()->check())
+        <li class="nav-item {{ Route::is('home') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('home') }}">Início <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li class="nav-item {{ Route::is('artists.*') ? 'active' : '' }}">
+          <a class="nav-link " href="{{route('artists.index')}}">Artistas <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+
+        <li class="nav-item {{ Route::is('albums.*') ? 'active' : '' }}">
+          <a class="nav-link " href="{{route('albums.index')}}">Albuns <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+
+        <li class="nav-item {{ Route::is('genres.*') ? 'active' : '' }}">
+          <a class="nav-link " href="{{route('genres.index')}}">Gênero <span class="sr-only">(current)</span></a>
         </li>
+
+        <li class="nav-item {{ Route::is('tracks.*') ? 'active' : '' }}">
+          <a class="nav-link " href="{{route('tracks.index')}}">Músicas <span class="sr-only">(current)</span></a>
+        </li>
+        
+       
+      
+        @endif
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      @if(auth()->check())
+      <button onclick="document.querySelector('#logout').submit();" class="btn btn-outline-primary">Sair</button>
+      <form method="POST" id="logout" action="{{route('logout')}}">{{csrf_field()}}</form>
+      @else
+
+      <a href="{{ route('login') }}" class="btn btn-light {{ Route::is('login') ? 'active' : '' }}">Login</a>
+      <a href="{{ route('register')}}" class="btn btn-light {{ Route::is('register') ? 'active' : '' }} ">Inscrever</a>
+
+      @endif
     </div>
   </nav>
+
