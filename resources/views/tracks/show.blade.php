@@ -5,15 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
             <div class="row justify-content-between mb-2">
-               <h4 class="mb-2">Exbindo album: {{$album->title}}</h4>
+               <h4 class="mb-2">Exibindo faixa: {{$track->title}}</h4>
                <div>
                     <button 
                     class="btn btn-outline-primary"
                     :class="likedByUser ? 'btn-outline-secondary' : 'btn-outline-primary'"
                     @click="like()">@{{statusDesc}}</button>
-                    <a href="{{route('albums.edit', $album->id)}}" class="btn btn-outline-success">Editar</a>
+                    <a href="{{route('tracks.edit', $track->id)}}" class="btn btn-outline-success">Editar</a>
                     <button  class="btn btn-outline-danger" onclick="document.querySelector('#destroy').submit()" >Remover</button>
-                    <form method="post" id="destroy" action="{{route('albums.destroy', $album->id)}}">
+                    <form method="post" id="destroy" action="{{route('tracks.destroy', $track->id)}}">
                         {{csrf_field()}}
                         {{ method_field('DELETE') }}
                     </form>
@@ -22,18 +22,20 @@
             <div class="col-12 col-md-6 mt-2">
                 <h5>Detalhes</h5>
                 <ul>
-                    <li>Artista: {{ $album->artist->name}}</li>
-                    <li>Ano: {{ $album->year}}</li>
+                    <li>Artista: {{ $track->album->artist->name}}</li>
+                    <li>Album: {{ $track->album->title}}</li>
+                    <li>Número da faixa: {{ $track->number }}</li>
+                    <li>Gênero: {{ $track->genre ? $track->genre->name : '...' }}</li>
                 </ul>
-                <h5>Músicas</h5>
+                <h5>Usuários que curtiram: </h5>
                 <ul>
-                    @forelse($album->tracks as $track)
-                    <li>{{ $track->title }}</li>
+                    @forelse($track->users as $user)
+                    <li>{{ $user->name }}</li>
                     @empty
-                    <li>Nenhuma música encontrada!</li>
+                    <li>Nenhuma curtida registrada</li>
                     @endforelse
                 </ul>
-                <p>Total: {{$album->tracks->count()}}</p>
+                <p>Total: {{$track->users->count()}}</p>
             </div>
           
         </div>
@@ -46,8 +48,8 @@
 new Vue({
     el: '#app',
     data: () => ({
-        album: {!! json_encode($album) !!},
-        likedByUser: {{ $album->likedByUser() }}
+        track: {!! json_encode($track) !!},
+        likedByUser: {{ $track->likedByUser() }}
     }),
     computed:{
         statusDesc: function(){
@@ -56,7 +58,7 @@ new Vue({
     },
     methods: {
         like(){
-            axios.put(`/albums/${this.album.id}/like`)
+            axios.put(`/tracks/${this.track.id}/like`)
             .then(({data}) => {
                 this.likedByUser = data
             })

@@ -6,6 +6,7 @@ use App\Album;
 use App\Artist;
 use Illuminate\Http\Request;
 use App\Http\Requests\AlbumRequest;
+use Illuminate\Support\Facades\DB;
 
 use Session;
 
@@ -16,9 +17,21 @@ class AlbumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('albums.index')->withAlbums(Album::withCount('tracks')->get());
+        
+        
+        if(request()->ajax()){
+            $this->validate($request, [
+                'artist' =>'integer|required|exists:artists,id'
+            ]);
+
+            $albums = Album::where('artist_id', $request->artist)->get();
+            return response()->json($albums);
+        }
+        else{
+            return view('albums.index')->withAlbums(Album::withCount('tracks')->get());
+        }
     }
 
     /**
@@ -104,5 +117,12 @@ class AlbumController extends Controller
         Session::flash('alert-class', 'alert-danger');
         Session::flash('message', 'Album ' . $album->title . ' removido com sucesso!');
         return redirect()->route('albums.index');
+    }
+
+    public function like(Album $album)
+    {
+        auth()->user()->albums()->toggle([$album->id]);
+
+        return response()->json($album->likedByUser())->setStatusCode(200);
     }
 }

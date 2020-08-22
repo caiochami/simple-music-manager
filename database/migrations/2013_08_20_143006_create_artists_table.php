@@ -18,6 +18,42 @@ class CreateArtistsTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        DB::table('artists')->insert(
+            [
+                'name' => 'Yes',
+            ]
+        );
+
+        DB::table('artists')->insert(
+            [
+                'name' => 'Soft Machine',
+            ]
+        );
+
+        DB::table('artists')->insert(
+            [
+                'name' => 'Gentle Giant',
+            ]
+        );
+
+        DB::table('artists')->insert(
+            [
+                'name' => 'Emerson, Lake and Palmer',
+            ]
+        );
+
+        DB::table('artists')->insert(
+            [
+                'name' => 'Caravan',
+            ]
+        );
+
+        DB::table('artists')->insert(
+            [
+                'name' => 'Genesis',
+            ]
+        );
     }
 
     /**

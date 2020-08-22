@@ -31,11 +31,12 @@
         @endif
       </ul>
       @if(auth()->check())
+      <span class="text-secondary mr-2">{{ auth()->user()->name }}</span>
       <button onclick="document.querySelector('#logout').submit();" class="btn btn-outline-primary">Sair</button>
       <form method="POST" id="logout" action="{{route('logout')}}">{{csrf_field()}}</form>
       @else
 
-      <a href="{{ route('login') }}" class="btn btn-light {{ Route::is('login') ? 'active' : '' }}">Login</a>
+      <a href="{{ route('login') }}" class="btn mr-1 btn-light {{ Route::is('login') ? 'active' : '' }}">Login</a>
       <a href="{{ route('register')}}" class="btn btn-light {{ Route::is('register') ? 'active' : '' }} ">Inscrever</a>
 
       @endif

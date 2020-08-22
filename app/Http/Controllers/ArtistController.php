@@ -17,7 +17,7 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        return view('artists.index')->withArtists(Artist::all());
+        return view('artists.index')->withArtists(Artist::orderBy('name')->get());
     }
 
     /**

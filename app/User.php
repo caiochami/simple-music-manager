@@ -51,4 +51,14 @@ class User extends Authenticatable
         }
     }
 
+    public function tracks()
+    {
+        return $this->belongsToMany(Track::class);
+    }
+
+    public function albums()
+    {
+        return $this->belongsToMany(Album::class);
+    }
+
 }

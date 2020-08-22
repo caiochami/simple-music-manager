@@ -19,10 +19,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('artists', 'ArtistController' ,['except' => [ 'show']]);
+
+    Route::put('/albums/{album}/like' , 'AlbumController@like')->name('albums.like');
+
     Route::resource('albums', 'AlbumController');
-    Route::resource('tracks', 'TrackController', ['except' => [ 'show']]);
-    Route::resource('genres', 'GenreController' ,['except' => [ 'show']]);
+
+    Route::put('/tracks/{track}/like' , 'TrackController@like')->name('tracks.like');
     
+    Route::resource('tracks', 'TrackController');
+
+    Route::resource('genres', 'GenreController' ,['except' => [ 'show']]);
 });
 
 Route::get( '/{any}',function() {

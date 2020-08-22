@@ -15,14 +15,14 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('artist_id')->unsigned()->nullable()->index();
+            $table->integer('artist_id')->unsigned()->index();
             $table->string('title');
             $table->string('year');
             $table->timestamps();
 
             $table->foreign('artist_id')
             ->references('id')->on('artists')
-            ->onDelete('set null');
+            ->onDelete('cascade');
         });
     }
 

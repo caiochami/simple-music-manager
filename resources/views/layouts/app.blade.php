@@ -13,34 +13,36 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Scripts -->
-    <script defer src="{{ asset('js/app.js') }}"></script>
+    
 </head>
 <body>
-    <div id="app">
-        @include('partials._navbar')
-        
-        @if (session('message'))
-            <div class="alert {{session('alert-class')}}" role="alert">
-              <h4 class="alert-heading"></h4>
-              <p>{{ session('message') }}</p>
-            </div>
-        @endif
-
-  
-    </div>
-    <main role="main" class="container">
-
+   
+    @include('partials._navbar')
+    
+    @if (session('message'))
+        <div class="alert {{session('alert-class')}}" role="alert">
+            <h4 class="alert-heading"></h4>
+            <p>{{ session('message') }}</p>
+        </div>
+    @endif
+   
+    <main role="main" id="app" class="container">
         <div class="starter-template p-1">
             @yield('content')
         </div>
-  
     </main><!-- /.container -->
 
     <script>
         setTimeout(() => {
             $('.alert').fadeOut(400)            
         }, 3000);
+
+        
     </script>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('custom_scripts')
   
 
     

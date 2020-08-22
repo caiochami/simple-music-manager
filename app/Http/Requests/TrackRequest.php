@@ -13,7 +13,7 @@ class TrackRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -23,8 +23,14 @@ class TrackRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $rules = [
+            'year' => 'integer|required',            
+            'album' =>'integer|required|exists:albums,id',
+            'genre' =>'integer|required|exists:genres,id',
+            'number' => 'integer|required',
+            'title' => 'required|string|max:255|title'
         ];
+        
+        return $rules;
     }
 }

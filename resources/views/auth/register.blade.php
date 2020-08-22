@@ -6,7 +6,7 @@
         <div class="col-12 col-md-6">
             
                 
-            <h3>Registrar</h3>
+            <h3>Cadastre-se</h3>
 
                 
             <form class="form-horizontal" 
@@ -93,8 +93,8 @@
 
                 <div class="form-group">
                     
-                        <button type="submit" class="btn btn-primary">
-                            Register
+                        <button type="submit" class="btn btn-success">
+                            Cadastrar
                         </button>
                     
                 </div>
