@@ -25,6 +25,10 @@
         <li class="nav-item {{ Route::is('tracks.*') ? 'active' : '' }}">
           <a class="nav-link " href="{{route('tracks.index')}}">Músicas <span class="sr-only">(current)</span></a>
         </li>
+
+        <li class="nav-item {{ Route::is('users.*') ? 'active' : '' }}">
+          <a class="nav-link " href="{{route('users.index')}}">Usuários <span class="sr-only">(current)</span></a>
+        </li>
         
        
       

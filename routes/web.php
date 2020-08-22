@@ -18,6 +18,8 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::resource('users', 'UserController', ['except' => [ 'show']]);
+
     Route::resource('artists', 'ArtistController' ,['except' => [ 'show']]);
 
     Route::put('/albums/{album}/like' , 'AlbumController@like')->name('albums.like');
